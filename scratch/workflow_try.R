@@ -85,3 +85,6 @@ for (i in data_combined$ca) {
 
 data_combined %>% 
   mutate(rolling_avg = rollmean(ca, k = 9, fill = NA, align = 'left'))
+
+
+hot dogs
