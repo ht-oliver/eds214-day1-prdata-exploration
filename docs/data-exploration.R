@@ -17,6 +17,9 @@ library(lubridate)
 # Read in all data, clean as you read it in to only include our five constituents.
 # Append each table with a column for site name (PRM, BQ1, BQ2, BQ3)
 # Combine all data tables to i
+# In order to solve the tiny version of this problem, you need the following:
+    # Numeric dates, numeric concentrations, window size, focal date
+    # Vector, vector, constant, moving scalar
 
 
 prm <- as.data.frame(read_csv(here("data/knb-lter-luq/RioMameyesPuenteRoto.csv"))) %>% 
@@ -36,6 +39,13 @@ bq3 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca3-Bisley.csv
   mutate(site_id = "QC3")
 
 data_combined = rbind(prm, bq1, bq2, bq3)
+
+data_combined2 <- data_combined %>% 
+  mutate(jul_day = yday(sample_date))
+
+
+
+
 
 
 

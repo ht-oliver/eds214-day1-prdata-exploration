@@ -46,8 +46,6 @@ ca_ma_1990_04_05 <- roll_avg(focal_date = as.Date("1990-04-05"),
                              win_size_wks = 9)
 
 
-
-ca_rolling <- roll_avg(focal_date = )
 # Did it work?  
 
 # Apply the function
@@ -62,6 +60,53 @@ data_combined$calc_rolling <- sapply(
   conc = data_combined$ca,
   win_size_wks = 9
 )
+
+
+ca_avg <- sapply(
+  data_combined$sample_date,
+  roll_avg,
+  dates = data_combined$sample_date,
+  conc = data_combined$ca,
+  win_size_wks = 9
+)
+
+
+k_avg <- sapply(
+  data_combined$sample_date,
+  roll_avg,
+  dates = data_combined$sample_date,
+  conc = data_combined$k,
+  win_size_wks = 9
+)
+
+
+nh4_n_avg <- sapply(
+  data_combined$sample_date,
+  roll_avg,
+  dates = data_combined$sample_date,
+  conc = data_combined$nh4_n,
+  win_size_wks = 9
+)
+
+
+mg_avg <- sapply(
+  data_combined$sample_date,
+  roll_avg,
+  dates = data_combined$sample_date,
+  conc = data_combined$mg,
+  win_size_wks = 9
+)
+
+
+nh3_n_avg <- sapply(
+  data_combined$sample_date,
+  roll_avg,
+  dates = data_combined$sample_date,
+  conc = data_combined$nh3_n,
+  win_size_wks = 9
+)
+
+nh4_n_avg
 
 
 
