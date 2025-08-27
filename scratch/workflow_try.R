@@ -11,25 +11,25 @@ library(dplyr)
 library(zoo)
 library(janitor)
 
-PRM <- as.data.frame(read_csv(here("data/knb-lter-luq/RioMameyesPuenteRoto.csv"))) %>% 
+prm <- as.data.frame(read_csv(here("data/knb-lter-luq/RioMameyesPuenteRoto.csv"))) %>% 
   clean_names() %>% select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k") %>% 
   mutate(site_id = "PRM")
 
-BQ1 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca1-Bisley.csv"))) %>% 
+bq1 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca1-Bisley.csv"))) %>% 
   clean_names() %>% select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k") %>% 
   mutate(site_id = "QC1")
 
-BQ2 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca2-Bisley.csv"))) %>% 
+bq2 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca2-Bisley.csv"))) %>% 
   clean_names() %>% select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k") %>% 
   mutate(site_id = "QC2")
 
-BQ3 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca3-Bisley.csv"))) %>% 
+bq3 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca3-Bisley.csv"))) %>% 
   clean_names() %>% select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k") %>% 
   mutate(site_id = "QC3")
 
 
-PRM_avgs <- PRM %>% 
-  mutate(roll_avg = seq_along($sample_date))
+prm_avgs <- prm %>% 
+  mutate(roll_avg = seq_along(prm$sample_date))
 
 # I want to make a new column that has the average for the last nine days in a new column - this wont be perfect but it will be something. Getting a rolling average is hard.
 
@@ -44,8 +44,8 @@ col2 <- for (i in vector) print (((i-1) + (i) + (i+1))/3)
 
 col2
 
-# combine all the data
-data_combined = rbind(PRM, BQ1, BQ2, BQ3)
+# combine watershed data
+data_combined = rbind(prm, bq1, bq2, bq3)
 
 data_combined %>% 
   mutate(ca_mean = rollmeanr(data_combined$ca, k = 9))
@@ -56,7 +56,7 @@ data_combined %>%
   
 
 
-value = new column at position n = the sum of position n-4:n+4 in old column
+# value = new column at position n = the sum of position n-4:n+4 in old column
 
 data_combined <- data_combined %>% 
   mutate(ca2 = mean(data_combined$ca[1:5]))
@@ -83,8 +83,22 @@ for (i in data_combined$ca) {
 }
 
 
-data_combined %>% 
-  mutate(rolling_avg = rollmean(ca, k = 9, fill = NA, align = 'left'))
+averages <- data_combined %>% 
+  mutate(avg_ca = rollmean(ca, k = 9, fill = NA, align = 'left')) %>% 
+  mutate(avg_nh4_n = rollmean(nh4_n, k = 9, fill = NA, align = 'left'))%>% 
+  mutate(avg_mg = rollmean(mg, k = 9, fill = NA, align = 'left'))%>% 
+  mutate(avg_no3_n = rollmean(no3_n, k = 9, fill = NA, align = 'left'))%>% 
+  mutate(avg_k = rollmean(k, k = 9, fill = NA, align = 'left'))
+
+ggplot(averages, aes (x = sample_date)) +
+  geom_line( aes(y = avg_ca, x = sample_date, colour = "blue")) +
+  geom_line( aes(y = avg_nh4_n, x = sample_date, colour = 'red')) +
+  geom_line( aes(y = avg_mg, x = sample_date, colour = 'orange'))
 
 
-hot dogs
+long_combined <-
+  data_combined %>% 
+  pivot_longer(cols = c("ca", "nh4_n", "no3_n", "mg"), names_to = "constituent", values_to = "concentration") %>% select(-k)
+
+
+

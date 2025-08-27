@@ -1,6 +1,9 @@
-library(here)
 library(tidyverse)
+library(here)
+library(dplyr)
+library(zoo)
 library(janitor)
+library(lubridate)
 
 #The potential workflow for the production of Figure 2 in Schaeffer et. al. 2002
 # Load in data from each location, samples were taken weekly on different dates at each site.
@@ -16,21 +19,25 @@ library(janitor)
 # Combine all data tables to i
 
 
-PRM <- as.data.frame(read_csv(here("data/knb-lter-luq/RioMameyesPuenteRoto.csv"))) %>% 
+prm <- as.data.frame(read_csv(here("data/knb-lter-luq/RioMameyesPuenteRoto.csv"))) %>% 
   clean_names() %>% select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k") %>% 
   mutate(site_id = "PRM")
  
-BQ1 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca1-Bisley.csv"))) %>% 
+bq1 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca1-Bisley.csv"))) %>% 
   clean_names() %>% select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k") %>% 
   mutate(site_id = "QC1")
 
-BQ2 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca2-Bisley.csv"))) %>% 
+bq2 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca2-Bisley.csv"))) %>% 
   clean_names() %>% select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k") %>% 
   mutate(site_id = "QC2")
 
-BQ3 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca3-Bisley.csv"))) %>% 
+bq3 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca3-Bisley.csv"))) %>% 
   clean_names() %>% select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k") %>% 
   mutate(site_id = "QC3")
+
+data_combined = rbind(prm, bq1, bq2, bq3)
+
+
 
 
 
