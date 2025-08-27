@@ -12,10 +12,10 @@ roll_avg <- function(focal_date, dates, concs, win_size_wks) {
 
 apply_rollmean <- function(df, date_col, constituent) {
   sapply(
-    data_combined$sample_date,
+    df$date_col,
     roll_avg,
-    dates = data_combined$sample_date,
-    conc = data_combined$constituent,
+    dates = df$date_col,
+    conc = df$constituent,
     win_size_wks = 9
   )
 }
