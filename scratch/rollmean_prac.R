@@ -22,7 +22,9 @@ bq3 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca3-Bisley.csv
   mutate(site_id = "QC3")
 
 data_combined <- rbind(prm, bq1, bq2, bq3) %>% 
-mutate(sample_date = ymd(sample_date))
+mutate(sample_date = ymd(sample_date)) %>% 
+  mutate(nh4_n = as.numeric(nh4_n)) %>% 
+           mutate(no3_n = as.numeric(no3_n))
 
 
 
@@ -98,15 +100,15 @@ mg_avg <- sapply(
 )
 
 
-nh3_n_avg <- sapply(
+no3_n_avg <- sapply(
   data_combined$sample_date,
   roll_avg,
   dates = data_combined$sample_date,
-  conc = data_combined$nh3_n,
+  conc = data_combined$no3_n,
   win_size_wks = 9
 )
 
-nh4_n_avg
+hector <- data_frame(sample_date = data_combined$sample_date, ca_avg, k_avg, mg_avg, nh4_n_avg, no3_n_avg, site_id = data_combined$site_id)
 
 
 
