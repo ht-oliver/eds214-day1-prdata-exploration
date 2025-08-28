@@ -1,25 +1,16 @@
 library(tidyverse)
 library(here)
 library(dplyr)
-library(zoo)
+
 library(janitor)
 library(lubridate)
-
-#The potential workflow for the production of Figure 2 in Schaeffer et. al. 2002
-# Load in data from each location, samples were taken weekly on different dates at each site.
-# Clean the data so we only have necessary constituents, and the date of the sample taken.
-# Mutate the data to add 5 columns to each table, each column should show the 9-week moving average for each constituent Meaning this column will have 1/9th the data as it's respective constituent columns.
-# Combine the data into a final table that only has 9-week time steps, and averaged results for each constituent at each sample site.
-# GGplot, group by constituent, create a new graph for each constituent 
 
 
 # REVISED WORKFLOW
 # Read in all data, clean as you read it in to only include our five constituents.
 # Append each table with a column for site name (PRM, BQ1, BQ2, BQ3)
-# Combine all data tables to i
-# In order to solve the tiny version of this problem, you need the following:
-    # Numeric dates, numeric concentrations, window size, focal date
-    # Vector, vector, constant, moving scalar
+# Combine all data tables to data_combined
+
 
 
 prm <- as.data.frame(read_csv(here("data/knb-lter-luq/RioMameyesPuenteRoto.csv"))) %>% 
@@ -38,10 +29,22 @@ bq3 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca3-Bisley.csv
   clean_names() %>% select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k") %>% 
   mutate(site_id = "QC3")
 
-data_combined = rbind(prm, bq1, bq2, bq3)
+data_combined <- rbind(prm, bq1, bq2, bq3) %>% 
+  mutate(sample_date = ymd(sample_date)) %>% 
+  mutate(nh4_n = as.numeric(nh4_n)) %>% 
+  mutate(no3_n = as.numeric(no3_n))
 
-data_combined2 <- data_combined %>% 
-  mutate(jul_day = yday(sample_date))
+
+source("R/roll_mean.R")
+
+ca_avg <- sapply(
+  data_combined$sample_date,
+  roll_avg,
+  dates = data_combined$sample_date,
+  conc = data_combined$ca,
+  win_size_wks = 9
+)
+
 
 
 

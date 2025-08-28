@@ -8,9 +8,82 @@
 library(tidyverse)
 library(here)
 library(dplyr)
-library(zoo)
 library(janitor)
 
+
+prm <- as.data.frame(read_csv(here("data/knb-lter-luq/RioMameyesPuenteRoto.csv"))) %>% 
+  mutate(site_id = "PRM")
+bq1 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca1-Bisley.csv"))) %>% 
+  mutate(site_id = "BQ1")
+bq2 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca2-Bisley.csv"))) %>% 
+  mutate(site_id = "BQ2")
+bq3 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca3-Bisley.csv"))) %>% 
+  mutate(site_id = "BQ3")
+
+data_combined <- rbind(prm, bq1, bq2, bq3) %>% 
+  clean_names() %>% 
+  select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k", "site_id") %>% 
+  mutate(sample_date = ymd(sample_date)) %>% 
+  filter(sample_date < "2000-01-01") %>% 
+  mutate(nh4_n = as.numeric(nh4_n)) %>% 
+  mutate(no3_n = as.numeric(no3_n)) 
+
+
+source("R/roll_mean.R")
+
+data_comb_avgs <- data_combined %>% 
+  
+  mutate(ca_avg = (sapply(
+    data_combined$sample_date,
+    roll_avg,
+    dates = data_combined$sample_date,
+    conc = data_combined$ca,
+    win_size_wks = 9
+  ))) %>% 
+  
+  mutate(nh4_n_avg = (sapply(
+    data_combined$sample_date,
+    roll_avg,
+    dates = data_combined$sample_date,
+    conc = data_combined$nh4_n,
+    win_size_wks = 9
+  ))) %>% 
+  
+  mutate(mg_avg = (sapply(
+    data_combined$sample_date,
+    roll_avg,
+    dates = data_combined$sample_date,
+    conc = data_combined$mg,
+    win_size_wks = 9
+  ))) %>% 
+  
+  mutate(no3_n_avg = (sapply(
+    data_combined$sample_date,
+    roll_avg,
+    dates = data_combined$sample_date,
+    conc = data_combined$no3_n,
+    win_size_wks = 9
+  ))) %>% 
+  
+  mutate(k_avg = (sapply(
+    data_combined$sample_date,
+    roll_avg,
+    dates = data_combined$sample_date,
+    conc = data_combined$k,
+    win_size_wks = 9
+  )))
+
+data_combined
+
+
+
+
+
+
+
+
+
+# THIS IS IDIOT LAND
 prm <- as.data.frame(read_csv(here("data/knb-lter-luq/RioMameyesPuenteRoto.csv"))) %>% 
   clean_names() %>% select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k") %>% 
   mutate(site_id = "PRM")

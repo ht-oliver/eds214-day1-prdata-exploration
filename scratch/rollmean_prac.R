@@ -30,6 +30,9 @@ mutate(sample_date = ymd(sample_date)) %>%
 
 
 
+
+
+
 roll_avg <- function(focal_date, dates, concs, win_size_wks) {
   # Which dates are in the window. Converting wks to days
   is_in_window <- (dates > ((focal_date) - (win_size_wks / 2) * 7)) &
@@ -62,6 +65,16 @@ data_combined$calc_rolling <- sapply(
   conc = data_combined$ca,
   win_size_wks = 9
 )
+
+## Mutation attempt
+mutate(data_combined, ca_avg1 = sapply(
+  data_combined$sample_date,
+  roll_avg,
+  dates = data_combined$sample_date,
+  conc = data_combined$ca,
+  win_size_wks = 9
+))
+
 
 
 ca_avg <- sapply(
