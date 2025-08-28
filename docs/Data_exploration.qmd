@@ -2,102 +2,40 @@
 title: "Data Exploration"
 author: "Henry Oliver"
 format: html
+message: FALSE
+
+
 ---
 
 **Load in Library**
 
 ```{r}
-library(tidyverse)
-library(here)
-library(dplyr)
-library(janitor)
-library(lubridate)
+
+source("../intermediate_results/environment_init.R")
 ```
 
-**Read in and clean data**
+**Import Data**
 
 ```{r}
-prm <- as.data.frame(read_csv(here("data/knb-lter-luq/RioMameyesPuenteRoto.csv"))) %>% 
-  mutate(site_id = "PRM")
-bq1 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca1-Bisley.csv"))) %>% 
-  mutate(site_id = "BQ1")
-bq2 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca2-Bisley.csv"))) %>% 
-  mutate(site_id = "BQ2")
-bq3 <- as.data.frame(read_csv(here("data/knb-lter-luq/QuebradaCuenca3-Bisley.csv"))) %>% 
-  mutate(site_id = "BQ3")
+
+source("../intermediate_results/data_import.R")
 ```
 
-**Combine data into data frame. Set column classes**
-
+**Clean Data**
 ```{r}
-data_combined <- rbind(prm, bq1, bq2, bq3) %>% 
-  clean_names() %>% 
-  select("sample_date", "ca", "nh4_n", "mg", "no3_n", "k", "site_id") %>% 
-  mutate(sample_date = ymd(sample_date)) %>% 
-  filter(sample_date < "2000-01-01") %>% 
-  mutate(nh4_n = as.numeric(nh4_n)) %>% 
-  mutate(no3_n = as.numeric(no3_n)) 
+source("../intermediate_results/data_clean.R")
 ```
 
-**Source rolling average function**
+**Perform Analysis**
 
 ```{r}
 source("../R/roll_mean.R")
-```
-
-**Apply rolling mean to all constituents in data frame into a new data frame**
-
-```{r}
-data_comb_avgs <- data_combined %>% 
-  
-  mutate(ca_avg = (sapply(
-    data_combined$sample_date,
-    roll_avg,
-    dates = data_combined$sample_date,
-    conc = data_combined$ca,
-    win_size_wks = 9
-  ))) %>% 
-  
-  mutate(nh4_n_avg = (sapply(
-    data_combined$sample_date,
-    roll_avg,
-    dates = data_combined$sample_date,
-    conc = data_combined$nh4_n,
-    win_size_wks = 9
-  ))) %>% 
-  
-  mutate(mg_avg = (sapply(
-    data_combined$sample_date,
-    roll_avg,
-    dates = data_combined$sample_date,
-    conc = data_combined$mg,
-    win_size_wks = 9
-  ))) %>% 
-  
-  mutate(no3_n_avg = (sapply(
-    data_combined$sample_date,
-    roll_avg,
-    dates = data_combined$sample_date,
-    conc = data_combined$no3_n,
-    win_size_wks = 9
-  ))) %>% 
-  
-  mutate(k_avg = (sapply(
-    data_combined$sample_date,
-    roll_avg,
-    dates = data_combined$sample_date,
-    conc = data_combined$k,
-    win_size_wks = 9
-  )))
+source("../analysis/analysis.R")
 ```
 
 Plot the final data
 
 ```{r}
-ggplot(data_comb_avgs, x = sample_date) +
-  geom_line(aes( x = sample_date, y = ca_avg)) +
-  geom_line(aes(x = sample_date, y = k_avg)) +
-  geom_line(aes(x = sample_date, y = mg_avg)) +
-  geom_line(aes(x = sample_date, y = no3_n_avg)) +
-  geom_line(aes(x = sample_date, y = nh4_n_avg))
+source("../plot/plot.R")
+Fig_3
 ```

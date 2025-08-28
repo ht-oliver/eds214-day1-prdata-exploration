@@ -8,3 +8,4 @@ apply_rollavg <- function(df, date_col, constituent) {
     win_size_wks = 9
   )
 }
+

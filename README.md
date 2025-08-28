@@ -10,6 +10,19 @@ This project is intended to serve as practice for reproducing analysis and figur
 
 This repo contains scripts which house code that seeks to recreate the analysis performed to create the figure picture above. In addition to scripts, this repo contains all of the raw and cleaned data that was utilized in Schaefer et. al.'s research, and obtained from the Environmental Data Initiatives website at (<https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-luq.20.4923064>).
 
+#### Data
+
+#### Intermediate Results
+
+#### Analysis
+
+#### Docs
+
+
+
+
+
+
 ### **3) Data Access**
 
 Schaefer et. al's raw data is made publicly available by the Environmental Data Initiative organisation, and can be downloaded at the link provided in the contents section. A citation for the data source is also located below in the references for this repository.
