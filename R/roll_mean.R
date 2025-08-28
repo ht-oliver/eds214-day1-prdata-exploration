@@ -5,7 +5,7 @@ roll_avg <- function(focal_date, dates, concs, win_size_wks) {
   # Find the associated concentrations
   window_concs <- concs[is_in_window]
   # calculate the mean
-  result <- mean(window_concs)
+  result <- mean(window_concs, na.rm = TRUE)
   
   return(result)
 }
