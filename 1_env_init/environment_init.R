@@ -12,5 +12,5 @@ library(dplyr)
 library(janitor)
 library(lubridate)
 
-source("R/roll_mean.R")
+source("../R/roll_mean.R")
 

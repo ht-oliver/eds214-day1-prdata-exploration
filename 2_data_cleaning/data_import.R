@@ -1,6 +1,6 @@
 # Import raw data from data folder. Add a column to each import that identifies the site ID.
 
-source("1_env_init/environment_init.R")
+# source("1_env_init/environment_init.R")
 
 prm <- as.data.frame(read_csv(here("data/knb-lter-luq/RioMameyesPuenteRoto.csv"), na = "NA")) %>% 
   mutate(site_id = "PRM")

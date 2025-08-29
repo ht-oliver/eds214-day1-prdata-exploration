@@ -10,28 +10,67 @@ This project is intended to serve as practice for reproducing analysis and figur
 
 This repo contains scripts which house code that seeks to recreate the analysis performed to create the figure picture above. In addition to scripts, this repo contains all of the raw and cleaned data that was utilized in Schaefer et. al.'s research, and obtained from the Environmental Data Initiatives website at (<https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-luq.20.4923064>).
 
-#### Data
+#### data
 
-#### Intermediate Results
+Contains the raw data from Schaeffer et. al. 2000 for ion (constituent) levels in four watersheds in Puerto Rico
 
-#### Analysis
+#### 1_environment_init
 
-#### Docs
+Contains all necessary packages and functions for analysis.
 
+#### 2_data_cleaning
 
+Contains the scripts that import the necessary data, and the script that cleans the data before analysis
 
+#### 3_analysis
 
+Contains the primary analysis of the cleaned data, primarily applying a rolling average function to the constituent values, and further cleaning/transforming the data into a final data frame.
 
+#### 4_processed_data
 
-### **3) Data Access**
+Contains the final data frame used to plot Figure 3, saved as rivers_data_long.csv
+
+#### 5_plot
+
+Contains the script that produces Figure 3
+
+#### docs
+
+Contains the quarto document that can be rendered to view the steps taken to produce Figure 3
+
+#### 
+
+### **3) Flowchart**
+
+The flowchart below provides a visual for the workflow of this project
+
+![](Flowchart.png){width="500"}
+
+### **4) Analysis**
+
+This analysis can be broke up into 5 parts, listed below:
+
+#### **1) Environment Initialization**
+
+#### **2) Data Import**
+
+#### **3) Data Cleaning**
+
+#### **4) Analysis**
+
+#### **5) Plot Generation**
+
+##### 
+
+### **4) Data Access**
 
 Schaefer et. al's raw data is made publicly available by the Environmental Data Initiative organisation, and can be downloaded at the link provided in the contents section. A citation for the data source is also located below in the references for this repository.
 
-### **4) Author**
+### **5) Author**
 
 Henry Oliver, the author of this repository is currently a student in the Masters of Environmental Data Science program at the University of California, Santa Barbara.
 
-### **5) References**
+### **6) References**
 
 Schaefer, D. A., McDowell, W. H., Scatena, F. N., & Asbury, C. E. (2000). *Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico*. **Journal of Tropical Ecology, 16**, 189–207. <https://doi.org/10.1017/S0266467400001358>
 

@@ -3,39 +3,50 @@ title: "Data Exploration"
 author: "Henry Oliver"
 format: html
 message: FALSE
-
+warning: FALSE
 
 ---
 
-**Load in Library**
+**Environment Initialization** 
+
+This code chunk loads in the necessary packages and functions that will be utilized in analysis and plotting.
 
 ```{r}
 
-source("../intermediate_results/environment_init.R")
+source("../1_env_init/environment_init.R")
 ```
+________________________________________________________________________
+**Data Import** 
 
-**Import Data**
+This code chunk loads in the concentrations of all measured constituents from four watersheds in Puerto Rico directly from the raw data contained in the "data" folder
 
 ```{r}
 
-source("../intermediate_results/data_import.R")
+source("../2_data_cleaning/data_import.R")
 ```
+________________________________________________________________________
+**Data Cleaning**
 
-**Clean Data**
+This code chunk combines all of the raw data into one data frame, and then mutates the data to only include the relevant columns and dates, and converts the data into a long format. This is achieved through the "select", "filter" and "pivot_longer" functions.  This step also assures that the dates are in the "date" format recognized by R
+
 ```{r}
-source("../intermediate_results/data_clean.R")
+source("../2_data_cleaning/data_clean.R")
 ```
+________________________________________________________________________
+**Analysis**
 
-**Perform Analysis**
+This analysis calculates a rolling average over 9-weeks for each constituent for each watershed. The rolling average value is computed using the "roll_avg" function contained in the R folder. Tables generated from this computation are located in 4_processed_data.
 
 ```{r}
-source("../R/roll_mean.R")
-source("../analysis/analysis.R")
+
+source("../3_analysis/analysis.R")
 ```
+________________________________________________________________________
+**Plot**
 
-Plot the final data
+This code chunk produces the final figure, which shows the concentrations of calcium, ammonium, nitrate, magnesium and potassium in four watersheds over the span of 1989-1999.
 
 ```{r}
-source("../plot/plot.R")
-Fig_3
+source("../5_plot/plot.R")
+figure_2
 ```
