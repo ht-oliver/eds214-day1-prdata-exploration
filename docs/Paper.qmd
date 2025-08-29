@@ -12,8 +12,8 @@ warning: FALSE
 This code chunk installs the necessary packages that will be utilized in analysis and plotting.
 
 ```{r}
-
-source("../1_env_init/environment_init.R")
+# WHEN I DON'T COMMENT THIS OUT I GET AN ERROR IMMEDIATELY UURUGHEHEGU
+# source("../1_env_init/environment_init.R")
 ```
 ________________________________________________________________________
 **Data Import** 
