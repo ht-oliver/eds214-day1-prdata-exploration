@@ -40,9 +40,11 @@ Contains the script that produces Figure 3
 
 ##### **docs**
 
-Contains the quarto document that can be rendered to view the steps taken and the files referenced to produce Figure 3
+Contains the html website created by the output of the Quarto document titled "paper.qmd" in the /paper directory
 
-#### **figs**
+##### **paper**
+
+Contains the Quarto document that can be used to render the entire analysis
 
 ### **3) Flowchart**
 
@@ -52,7 +54,7 @@ The flowchart below provides a visual for the workflow of this project
 
 ### **4) How to Perform this analysis**
 
-In order to perform this analysis, the user's computer must have the R software language installed and, optionally, the RStudio Integrated Development Language. The analysis can be performed with ease by rendering the Quarto document titled "paper.qmd" contained in the "docs" folder in the repository. A more detailed explanation of the analysis can be broken down into 5 steps, listed below:
+In order to perform this analysis, the user's computer must have the R software language installed and, optionally, the RStudio Integrated Development Language. The analysis can be performed with ease by rendering the Quarto document titled "paper.qmd" contained in the "/paper" folder in the repository. A more detailed explanation of the analysis can be broken down into 5 steps, listed below:
 
 #### **1 - Environment Initialization**
 
