@@ -1,15 +1,6 @@
 
 # This document installs the packages necessary to perform analysis
-#install.packages("tidyverse") #data mutation functions
-#install.packages("here") #data location functions
-#install.packages("dplyr") #data manipulation functions
-#install.packages("janitor") #data cleaning functions
-#install.packages("lubridate") #time-data manipulation functions
 
-library(tidyverse)
-library(here)
-library(janitor)
-library(lubridate)
+# install.packages(c("tidyverse", "here", "janitor", "lubridate"))
 
-source("../R/roll_avg.R")
 

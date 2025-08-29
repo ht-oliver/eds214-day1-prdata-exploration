@@ -1,5 +1,5 @@
 ---
-title: "Data Exploration"
+title: "Reproduction of Schaefer et. al. 2000 - Ion Concentrations Puerto Rico Rivers after Hurricane Hugo"
 author: "Henry Oliver"
 format: html
 message: FALSE
@@ -9,7 +9,7 @@ warning: FALSE
 
 **Environment Initialization** 
 
-This code chunk loads in the necessary packages and functions that will be utilized in analysis and plotting.
+This code chunk installs the necessary packages that will be utilized in analysis and plotting.
 
 ```{r}
 

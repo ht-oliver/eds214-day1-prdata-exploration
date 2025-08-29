@@ -1,6 +1,8 @@
-# Combine raw data imports into a single dataframe. Select for desired columns, change column classes.
+# This script combines the raw data imports into a single data frame, selects for desired columns and date range, and changes column classes so they can be properly imported into analysis.
 
-# source("1_env_init/environment_init.R")
+library(janitor)
+library(lubridate)
+
 
 
 
