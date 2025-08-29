@@ -56,7 +56,7 @@ data_comb_avgs <- data_comb_avgs %>%
 
 
 # Save the final output table to the "4_processed_data" folder
-write_csv(data_comb_avgs, "../4_processed_data/rivers_comb_long.csv")
+write_csv(data_comb_avgs, "../4_processed_data/data_comb_avgs.csv")
 
 
 

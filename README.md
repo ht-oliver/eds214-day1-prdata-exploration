@@ -10,31 +10,25 @@ This project is intended to serve as practice for reproducing analysis and figur
 
 This repo contains scripts which house code that seeks to recreate the analysis performed to create the figure picture above. In addition to scripts, this repo contains all of the raw and cleaned data that was utilized in Schaefer et. al.'s research, and obtained from the Environmental Data Initiatives website at (<https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-luq.20.4923064>).
 
-#### data
-
+##### **data**
 Contains the raw data from Schaeffer et. al. 2000 for ion (constituent) levels in four watersheds in Puerto Rico
 
-#### 1_environment_init
-
+##### **1_environment_init**
 Contains all necessary packages and functions for analysis.
 
-#### 2_data_cleaning
+##### **2_data_cleaning**
+Contains the scripts that import the necessary data, and the script that cleans the data before analysis.
 
-Contains the scripts that import the necessary data, and the script that cleans the data before analysis
+##### **3_analysis**
+Contains the primary analysis of the cleaned data. The script in this folder applies the roll_mean function for each constituent value, and susequently cleans/transforms the data into a final data frame called data_comb_avgs.
 
-#### 3_analysis
+##### **4_processed_data**
+Contains an export of the data frame used to plot Figure 3, saved as data_comb_avgs.csv
 
-Contains the primary analysis of the cleaned data, primarily applying a rolling average function to the constituent values, and further cleaning/transforming the data into a final data frame.
-
-#### 4_processed_data
-
-Contains the final data frame used to plot Figure 3, saved as rivers_data_long.csv
-
-#### 5_plot
-
+##### **5_plot**
 Contains the script that produces Figure 3
 
-#### docs
+##### **docs**
 
 Contains the quarto document that can be rendered to view the steps taken to produce Figure 3
 
@@ -50,15 +44,27 @@ The flowchart below provides a visual for the workflow of this project
 
 This analysis can be broke up into 5 parts, listed below:
 
-#### **1) Environment Initialization**
+#### **1 - Environment Initialization**
 
-#### **2) Data Import**
+This step installs the following packages and functions necessary to run the analysis:
 
-#### **3) Data Cleaning**
+-   (tidyverse) - tools for data manipulation, visualization, and analysis
 
-#### **4) Analysis**
+-   (here) - simplifies file referencing
 
-#### **5) Plot Generation**
+-   (janitor) - provides functions for data cleaning
+
+-   (lubridate) - provides functions for parsing, extracting, and manipulating date-time data
+
+-   roll_avg - Function; calculates the rolling average of concentration values within a specified time window (in weeks) centered around a given focal date. It identifies dates within the window, extracts the corresponding concentration values, and returns their mean, ignoring any missing (NA) values.
+
+#### **2 - Data Import**
+
+#### **3 - Data Cleaning**
+
+#### **4 - Analysis**
+
+#### **5 - Plot Generation**
 
 ##### 
 

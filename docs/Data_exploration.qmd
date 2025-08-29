@@ -44,7 +44,7 @@ source("../3_analysis/analysis.R")
 ________________________________________________________________________
 **Plot**
 
-This code chunk produces the final figure, which shows the concentrations of calcium, ammonium, nitrate, magnesium and potassium in four watersheds over the span of 1989-1999.
+This code chunk produces the final figure, which shows the concentrations of calcium, ammonium, nitrate, magnesium and potassium in four watersheds over the span of 1989-1995.
 
 ```{r}
 source("../5_plot/plot.R")

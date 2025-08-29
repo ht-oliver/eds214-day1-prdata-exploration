@@ -372,37 +372,38 @@ the analysis performed to create the figure picture above. In addition
 to scripts, this repo contains all of the raw and cleaned data that was
 utilized in Schaefer et. al.’s research, and obtained from the
 Environmental Data Initiatives website at (<a href="https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-luq.20.4923064" class="uri">https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-luq.20.4923064</a>).</p>
-<div id="data" class="section level4">
-<h4>data</h4>
+<div id="data" class="section level5">
+<h5><strong>data</strong></h5>
 <p>Contains the raw data from Schaeffer et. al. 2000 for ion
 (constituent) levels in four watersheds in Puerto Rico</p>
 </div>
-<div id="envrironment_init" class="section level4">
-<h4>1_envrironment_init</h4>
+<div id="environment_init" class="section level5">
+<h5><strong>1_environment_init</strong></h5>
 <p>Contains all necessary packages and functions for analysis.</p>
 </div>
-<div id="data_cleaning" class="section level4">
-<h4>2_data_cleaning</h4>
+<div id="data_cleaning" class="section level5">
+<h5><strong>2_data_cleaning</strong></h5>
 <p>Contains the scripts that import the necessary data, and the script
-that cleans the data before analysis</p>
+that cleans the data before analysis.</p>
 </div>
-<div id="analysis" class="section level4">
-<h4>3_analysis</h4>
-<p>Contains the primary analysis of the cleaned data, primarily applying
-a rolling average function to the constituent values, and further
-cleaning/transforming the data into a final data frame.</p>
+<div id="analysis" class="section level5">
+<h5><strong>3_analysis</strong></h5>
+<p>Contains the primary analysis of the cleaned data. The script in this
+folder applies the roll_mean function for each constituent value, and
+susequently cleans/transforms the data into a final data frame called
+data_comb_avgs.</p>
 </div>
-<div id="processed_data" class="section level4">
-<h4>4_processed_data</h4>
-<p>Contains the final data frame used to plot Figure 3, saved as
-rivers_data_long.csv</p>
+<div id="processed_data" class="section level5">
+<h5><strong>4_processed_data</strong></h5>
+<p>Contains an export of the data frame used to plot Figure 3, saved as
+data_comb_avgs.csv</p>
 </div>
-<div id="plot" class="section level4">
-<h4>5_plot</h4>
+<div id="plot" class="section level5">
+<h5><strong>5_plot</strong></h5>
 <p>Contains the script that produces Figure 3</p>
 </div>
-<div id="docs" class="section level4">
-<h4>docs</h4>
+<div id="docs" class="section level5">
+<h5><strong>docs</strong></h5>
 <p>Contains the quarto document that can be rendered to view the steps
 taken to produce Figure 3</p>
 </div>
@@ -420,19 +421,34 @@ project</p>
 <h3><strong>4) Analysis</strong></h3>
 <p>This analysis can be broke up into 5 parts, listed below:</p>
 <div id="environment-initialization" class="section level4">
-<h4><strong>1) Environment Initialization</strong></h4>
+<h4><strong>1 - Environment Initialization</strong></h4>
+<p>This step installs the following packages and functions necessary to
+run the analysis:</p>
+<ul>
+<li><p>(tidyverse) - tools for data manipulation, visualization, and
+analysis</p></li>
+<li><p>(here) - simplifies file referencing</p></li>
+<li><p>(janitor) - provides functions for data cleaning</p></li>
+<li><p>(lubridate) - provides functions for parsing, extracting, and
+manipulating date-time data</p></li>
+<li><p>roll_avg - Function; calculates the rolling average of
+concentration values within a specified time window (in weeks) centered
+around a given focal date. It identifies dates within the window,
+extracts the corresponding concentration values, and returns their mean,
+ignoring any missing (NA) values.</p></li>
+</ul>
 </div>
 <div id="data-import" class="section level4">
-<h4><strong>2) Data Import</strong></h4>
+<h4><strong>2 - Data Import</strong></h4>
 </div>
 <div id="data-cleaning" class="section level4">
-<h4><strong>3) Data Cleaning</strong></h4>
+<h4><strong>3 - Data Cleaning</strong></h4>
 </div>
 <div id="analysis-2" class="section level4">
-<h4><strong>4) Analysis</strong></h4>
+<h4><strong>4 - Analysis</strong></h4>
 </div>
 <div id="plot-generation" class="section level4">
-<h4><strong>5) Plot Generation</strong></h4>
+<h4><strong>5 - Plot Generation</strong></h4>
 <div id="section-1" class="section level5">
 <h5></h5>
 </div>
