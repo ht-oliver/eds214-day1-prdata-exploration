@@ -32,9 +32,10 @@ https://github.com/ht-oliver/eds214-day1-prdata-exploration/commit/77b3fac3c87ac
 
 ## Automate
 
-[NY] **Running the entire analysis requires rendering one Quarto document**
+[M] **Running the entire analysis requires rendering one Quarto document**
 
 - paper.qmd looks really good, but the only contents of the docs/ folder should be what you want rendered on GitHub Pages (pretty much HTML files and nothing else). paper.qmd should go in paper/.
+- Looks great now!
 
 [M] The analysis runs without errors
 
@@ -80,6 +81,7 @@ After cloning the repo on Workbench:
 
 [M] The commit history includes at least one merged branch and a resolved merge conflict
 
-[NY] The rendered analysis is accessible via GitHub Pages
+[M] The rendered analysis is accessible via GitHub Pages
 
 - Due to a capitalization issue, the paper.html version on GitHub Pages doesn't render
+- All fixed
